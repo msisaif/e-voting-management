@@ -2,9 +2,10 @@ import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { internalNavItems, outerNavItems } from '@/data';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { ExternalLink, Facebook, LayoutGrid, Linkedin, TextSelect, UsersRound } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -13,35 +14,10 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
-    {
-        title: 'Users',
-        href: '/users',
-        icon: UsersRound,
-    },
-    {
-        title: 'Elections',
-        href: '/elections',
-        icon: TextSelect,
-    },
+    ...internalNavItems,
 ];
 
-const footerNavItems: NavItem[] = [
-    {
-        title: 'www.orbeetal.com',
-        href: 'https://orbeetal.com',
-        icon: ExternalLink,
-    },
-    {
-        title: '/company/orbeetal',
-        href: 'https://www.linkedin.com/company/orbeetal',
-        icon: Linkedin,
-    },
-    {
-        title: '/Orbeetal',
-        href: 'https://www.facebook.com/Orbeetal',
-        icon: Facebook,
-    },
-];
+const footerNavItems: NavItem[] = [...outerNavItems];
 
 export function AppSidebar() {
     return (

@@ -48,7 +48,7 @@ export default function Welcome() {
                                             className="ml-1 inline-flex items-center font-medium text-[#4216c3] underline underline-offset-4 dark:text-[#EDEDEC]"
                                         >
                                             <Linkedin className="mr-1 h-4 w-4" />
-                                            <span>/company/orbeetal/</span>
+                                            <span>/company/orbeetal</span>
                                             <ExternalLink className="ml-2 h-4 w-4" />
                                         </a>
                                     </span>

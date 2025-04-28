@@ -17,7 +17,7 @@ export default function UserIndex({ users }: { users: Array }) {
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 <PlaceholderPattern className="absolute inset-0 z-0 size-full stroke-neutral-900/20 opacity-20 dark:stroke-neutral-100/20" />
                 <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <div className="w-full">
+                    <div className="w-full overflow-x-auto">
                         <table className="w-full table-auto border-collapse text-left text-sm text-gray-500 dark:text-gray-400">
                             <thead className="border-b border-gray-200 bg-gray-50 text-xs text-gray-700 uppercase dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400">
                                 <tr>

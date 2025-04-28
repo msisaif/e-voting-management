@@ -1,7 +1,7 @@
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -24,7 +24,7 @@ export default function ELectionIndex({ election, candidates }: { election: obje
                     <div className="w-full p-4">
                         {election.already_voted && (
                             <div className="mb-4 rounded bg-green-100 p-4 text-sm text-green-700 dark:bg-green-900 dark:text-green-300">
-                                You have already voted in this election.
+                                "Thank you! Your vote has been successfully submitted."
                             </div>
                         )}
                         <h1 className="text-2xl font-bold">{election.name}</h1>
@@ -36,12 +36,12 @@ export default function ELectionIndex({ election, candidates }: { election: obje
                                     <li key={candidate.id} className="mt-2">
                                         {candidate.name}
                                         {!election.already_voted && election.is_active && election.is_voter && (
-                                            <a
+                                            <Link
                                                 href={`/elections/${election.id}/vote/${candidate.id}`}
                                                 className="ml-2 inline-block rounded bg-blue-600 px-3 py-0.5 text-xs text-white hover:bg-blue-700 lg:text-sm"
                                             >
                                                 Vote
-                                            </a>
+                                            </Link>
                                         )}
                                     </li>
                                 ))}

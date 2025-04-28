@@ -36,6 +36,42 @@ class ElectionController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $users = User::get([
+            'id',
+            'name',
+        ]);
+
+        return Inertia::render('elections/create', [
+            'users' => $users->toArray(),
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'start_at' => 'required|date',
+            'end_at' => 'required|date|after:start_at',
+            'candidates' => 'required|array',
+            'voters' => 'required|array',
+        ]);
+
+        $election = new Election();
+        $election->user_id = $request->user()->id;
+        $election->name = $request->name;
+        $election->description = $request->description;
+        $election->start_at = $request->start_at;
+        $election->end_at = $request->end_at;
+        $election->candidates = $request->candidates;
+        $election->voters = $request->voters;
+        $election->save();
+
+        return to_route('elections.index')->with('success', 'Election created successfully.');
+    }
+
     public function vote(Request $request, Election $election)
     {
         $user = $request->user();
