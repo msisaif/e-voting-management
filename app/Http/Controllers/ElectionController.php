@@ -14,10 +14,13 @@ class ElectionController extends Controller
     public function index()
     {
         $elections = Election::query()
+            ->latest('id')
             ->get();
 
         $elections = $elections->map(function ($election) {
             $user = request()->user();
+
+            $count_voters = Vote::where('election_id', $election->id)->count();
 
             return [
                 'id' => $election->id,
@@ -27,7 +30,7 @@ class ElectionController extends Controller
                 'end_at' => $election->end_at?->format('d M Y h:ia') ?: '',
                 'is_voter' => $election->isVoter($user),
                 'is_active' => $election->isActive,
-                'is_finished' => $election->isFinished,
+                'is_finished' => $election->isFinished ?: $count_voters == count($election->voters),
             ];
         });
 
@@ -107,7 +110,9 @@ class ElectionController extends Controller
     {
         $user = $request->user();
 
-        if(!$election->isVoter($user) || !$election->isFinished) {
+        $count_voters = Vote::where('election_id', $election->id)->count();
+
+        if(!$election->isVoter($user) || !($election->isFinished ?: $count_voters == count($election->voters))) {
             return to_route('elections.index');
         }
 

@@ -44,7 +44,7 @@ export default function ELectionIndex({ elections }: { elections: Array }) {
                                         <td className="px-6 py-4">{election.start_at}</td>
                                         <td className="px-6 py-4">{election.end_at}</td>
                                         <td className="px-6 py-4 text-center">
-                                            {election.is_active && election.is_voter && (
+                                            {!election.is_finished && election.is_active && election.is_voter && (
                                                 <Link
                                                     href={`/elections/${election.id}/vote`}
                                                     className="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-700"
